@@ -18,6 +18,7 @@
 
 ```
 git clone https://github.com/INotEnemy/Lexer.git
+cd Lexer/
 mvn compile
 mvn package
 ```
