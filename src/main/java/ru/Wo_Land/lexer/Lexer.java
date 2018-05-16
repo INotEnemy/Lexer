@@ -12,7 +12,7 @@ public class Lexer
      0 - состояние окончания разбора лексемы
      5 - состояние успешного окончание программы
      6 - состояние ошибки
-     1-4 рабочие состояния
+     1 - 4 рабочие состояния
     */
     
     private int [][]controlTable = 
@@ -21,18 +21,18 @@ public class Lexer
          {0,6,6,6,0},//c
          {5,6,6,6,6}}; //$
 
-    private int [] LCount;
-    private int row =0; 
+    private int[] LCount;
+    private int row = 0; 
     private int colum = 0; 
     private int nextColum = 0; 
 
     private String input;   
     private String lineForOutputTable = ""; 
-    private String outputLine =""; 
+    private String outputLine = ""; 
 
-    private char c[] ;
+    private char c[];
 
-    private ArrayList [] outputTable;
+    private ArrayList[] outputTable;
 
     /**
      * Конструктор для объектов класса Lexer
@@ -48,7 +48,7 @@ public class Lexer
 
         LCount = new int[3]; 
 
-        this.input = inputLine+"$"; 
+        this.input = inputLine + "$"; 
         
         solution();
 
@@ -70,7 +70,7 @@ public class Lexer
 
                 nextColum = controlTable[row][nextColum]; // определяем следующее состояние
 
-                lineForOutputTable += c[i]; // приписываем лексеме текущий символ
+                lineForOutputTable + = c[i]; // приписываем лексеме текущий символ
             
                 if(nextColum == 0) addAndClear(colum);
             
@@ -108,9 +108,9 @@ public class Lexer
     private void addAndClear(int colum)
     {
         int x = generLexNum(colum);
-        outputTable[x-1].add(LCount[x-1],lineForOutputTable); 
-        outputLine += "L"+x+"-"+LCount[x-1]+", "; 
-        LCount[x-1]++; 
+        outputTable[x - 1].add(LCount[x - 1],lineForOutputTable); 
+        outputLine + = "L" + x + "-" + LCount[x - 1] + ", "; 
+        LCount[x - 1]++; 
         lineForOutputTable = ""; 
     }
     
@@ -132,35 +132,35 @@ public class Lexer
      */
     private void succsessExit(int i)
     {
-        if(i+1 == c.length)
+        if(i + 1 == c.length)
         { 
             System.out.println("Программа завершила работу без ошибок"); 
             System.out.println("Вы ввели: " + input);
             System.out.println("Таблица разобранных лексем:");
             printMatrix(outputTable);
-            System.out.println("Строка закодированных лексем: "+outputLine);
+            System.out.println("Строка закодированных лексем: " + outputLine);
         } 
-        else System.out.println("Программа завершила работу, встиетив символ конца строки '$', не дойдя до конца входной цепочки");
+        else System.out.println("Программа завершила работу, встретив символ конца строки '$', не дойдя до конца входной цепочки");
         i = c.length; // организуем выход из цикла в методе solution()
     }
     
     private void error(int i)
     {
-        System.out.println("Вы не закончили одну из лексем. Не был встречен символ окончания лексемы на "+i+" позиции");
-        System.out.println("Програама остановилась на разборе такой цепочки: "+lineForOutputTable);
+        System.out.println("Вы не закончили одну из лексем. Не был встречен символ окончания лексемы на " + i + " позиции");
+        System.out.println("Программа остановилась на разборе такой цепочки: " + lineForOutputTable);
         i = c.length; 
     }
 
     private void illegalSymbError(int i)
     {
-        System.out.println("Символ: "+c[i]+" недопустим"); 
+        System.out.println("Символ: " + c[i] + " недопустим"); 
         System.out.println("Будьте внимательнее при вводе входной цепочки и начните заново");
         i = c.length; 
     }
 
     private void printMatrix(ArrayList [] matrix)
     {
-        for (int i = 0; i <3; i++) 
+        for (int i = 0; i < 3; i++) 
         {
             for (int j = 0; j <matrix[i].size(); j++) 
             {
