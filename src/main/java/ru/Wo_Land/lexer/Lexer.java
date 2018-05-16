@@ -16,10 +16,10 @@ public class Lexer
     */
     
     private int [][]controlTable = 
-        {{1,6,1,4,6},//a
-         {3,2,0,6,3},//b
-         {0,6,6,6,0},//c
-         {5,6,6,6,6}}; //$
+        {{1,6,1,4,6}, // a
+         {3,2,0,6,3}, // b
+         {0,6,6,6,0}, // c
+         {5,6,6,6,6}};  // $
 
     private int[] LCount;
     private int row = 0; 
