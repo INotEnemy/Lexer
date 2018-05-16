@@ -33,7 +33,9 @@ c |c |c |
 Для сборки проекта нам потребуются его исходники. Выбирем удобную нам директорию и пишем   
 `git clone https://github.com/INotEnemy/Lexer.git`  
 Затем используем команду `mvn compile` всего скачаного прокета(находимся в папке Lexer). Если всё хорошо, то идём <a href="#next">дальше<a>.
-Если при компиляции выдаёт такую ошибку `No compiler is provided in this environment. Perhaps you are running on a JRE rather than a    JDK?`, то выполняем следующее:
+Если при компиляции выдаёт такую ошибку   
+`No compiler is provided in this environment. Perhaps you are running on a JRE rather than a    JDK?`  
+ то выполняем следующее:
 `mvn -version` после выполнения этой команды должна распечататься информация о версии Maven. Вот что получилось в моём случае:  
 ```
 Apache Maven 3.5.3 (3383c37e1f9e9b3bc3df5050c29c8aff9f295297; 2018-02-24T22:49:05+03:00)
