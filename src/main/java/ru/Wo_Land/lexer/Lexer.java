@@ -7,21 +7,28 @@ package ru.Wo_Land.lexer;
 import java.util.ArrayList;
 public class Lexer
 {
-
-    private int [][]controlTable = // задаём управляющую таблицу (таблицу переходов и выходов)
+    /*
+     задаём управляющую таблицу (таблицу переходов и выходов)
+     0 - состояние окончания разбора лексемы
+     5 - состояние успешного окончание программы
+     6 - состояние ошибки
+     1-4 рабочие состояния
+    */
+    
+    private int [][]controlTable = 
         {{1,6,1,4,6},//a
          {3,2,0,6,3},//b
          {0,6,6,6,0},//c
          {5,6,6,6,6}}; //$
 
     private int [] LCount;
-    private int row =0; // хранит текущий символ
-    private int colum = 0;// хранит текущее состояние
-    private int nextColum = 0;// хранит следующее состояние 
+    private int row =0; 
+    private int colum = 0; 
+    private int nextColum = 0; 
 
-    private String input;   // обрабатываемая входная цепочка
-    private String lineForOutputTable = ""; // текущая выходная лексема, для занесения в таблицу
-    private String outputLine =""; // выходная строка кодированных лексем
+    private String input;   
+    private String lineForOutputTable = ""; 
+    private String outputLine =""; 
 
     private char c[] ;
 
@@ -33,13 +40,13 @@ public class Lexer
      */
     public Lexer(String inputLine)
     {
-        outputTable    = new ArrayList[3]; // создаём массив из трёх строк типа ArrayList
+        outputTable    = new ArrayList[3]; 
         
-        outputTable[0] = new ArrayList<String>(); // заносим в элементы массива списки
-        outputTable[1] = new ArrayList<String>(); // делаем это для динамичности второго измерения
+        outputTable[0] = new ArrayList<String>(); 
+        outputTable[1] = new ArrayList<String>(); 
         outputTable[2] = new ArrayList<String>();
 
-        LCount = new int[3]; // создаём три переменные-счётчика для подсчёта и индексации распознанных лексем
+        LCount = new int[3]; 
 
         this.input = inputLine+"$"; 
         
@@ -64,16 +71,12 @@ public class Lexer
                 nextColum = controlTable[row][nextColum]; // определяем следующее состояние
 
                 lineForOutputTable += c[i]; // приписываем лексеме текущий символ
-
-                if(nextColum == 0) // переход в начальное состояние указывает, 
-                                   // что лексема разобрана и её необходимо записать в таблицу кодирования
-                    addAndClear(colum);
-                
-                if(nextColum == 5)// переход в конечное состояние означает, 
-                                  // что был встречен символ окончания входной цепочки: $
-                    succsessExit(i);
+            
+                if(nextColum == 0) addAndClear(colum);
+            
+                if(nextColum == 5) succsessExit(i);
    
-                if(nextColum == 6)  error(i);                  
+                if(nextColum == 6) error(i);                  
         }
     }
     
@@ -105,10 +108,10 @@ public class Lexer
     private void addAndClear(int colum)
     {
         int x = generLexNum(colum);
-        outputTable[x-1].add(LCount[x-1],lineForOutputTable); // вносим в таблицу лексем лексему типа L1,2 или 3
-        outputLine += "L"+x+"-"+LCount[x-1]+", "; // приписываем к выходной кодированной строке очередную лексему
-        LCount[x-1]++; // увеличиваем счётчик количества распознанных лексем 
-        lineForOutputTable = ""; // очищаем контейнер для хранения текущей лексемы
+        outputTable[x-1].add(LCount[x-1],lineForOutputTable); 
+        outputLine += "L"+x+"-"+LCount[x-1]+", "; 
+        LCount[x-1]++; 
+        lineForOutputTable = ""; 
     }
     
     /**
@@ -145,14 +148,14 @@ public class Lexer
     {
         System.out.println("Вы не закончили одну из лексем. Не был встречен символ окончания лексемы на "+i+" позиции");
         System.out.println("Програама остановилась на разборе такой цепочки: "+lineForOutputTable);
-        i = c.length; // организуем выход из цикла в методе solution()
+        i = c.length; 
     }
 
     private void illegalSymbError(int i)
     {
         System.out.println("Символ: "+c[i]+" недопустим"); 
         System.out.println("Будьте внимательнее при вводе входной цепочки и начните заново");
-        i = c.length; // организуем выход из цикла в методе solution()
+        i = c.length; 
     }
 
     private void printMatrix(ArrayList [] matrix)
