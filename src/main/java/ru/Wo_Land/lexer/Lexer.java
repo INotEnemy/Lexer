@@ -36,7 +36,7 @@ public class Lexer
 
     /**
      * Конструктор для объектов класса Lexer
-     * 
+     * @param inputLine - вводимая цепочка символов
      */
     public Lexer(String inputLine)
     {
