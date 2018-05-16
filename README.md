@@ -1,25 +1,25 @@
 # Lexer
 
-Учебный проект по дисциплине "Системное Программное Обеспечение"
+Educational project on discipline " System software"
 
-## Описание
+## Description
 
-Программа разработана для проверки входной цепочки символов на соответствие регулярному выражению и разбиению её на лексемы.
+The program is designed to check the input character chain for compliance with the regular expression and its division into tokens.
 
-Регулярное выражение: 
+Regular Expression: 
 ```
 (c)+|(ab)+b|(ba)+c
 ```
 
-При вводе неверной входной цепочки, программа подскажет Вам что именно вы сделали не так и попросит начать всё с начала.
+If you enter the wrong chain, the program will tell you what you did wrong and offer to start all over again.
 
-## Требования к сборке
+## Build requirements
 
 - `jdk 1.8+`
 - `maven 3.5.3+`
 - `maven-jar-plugin 3.1.0+`
 
-## Сборка
+## Building
 
 ```
 git clone https://github.com/INotEnemy/Lexer.git
@@ -28,7 +28,7 @@ mvn compile
 mvn package
 ```
   
-## Запуск
+## Running
 
 ```
 java -jar target/lexer-1.0.jar "cccbac"
